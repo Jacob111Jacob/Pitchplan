@@ -17,7 +17,9 @@ app = Flask(__name__)
 stripe.api_key = os.getenv('STRIPE_API_KEY')
 
 # === FIREBASE SETUP ===
-cred = credentials.Certificate("firebase_service_account.json")
+import json
+firebase_creds = json.loads(os.environ['FIREBASE_CREDENTIALS'])
+cred = credentials.Certificate(firebase_creds)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
